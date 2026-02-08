@@ -1,0 +1,42 @@
+# Guía de Configuración: Mirascope con Gemini
+
+He configurado correctamente Mirascope para conectarse con Google Gemini. Aquí tienes un resumen de lo que se hizo y cómo ejecutarlo.
+
+## Cambios Realizados
+
+1. **Instalación de Dependencias**:
+   Se instalaron las librerías necesarias con el siguiente comando:
+   ```bash
+   pip install "mirascope[gemini]" "mirascope[google]" python-dotenv
+   ```
+   *(Nota: `mirascope[google]` es necesario para la versión v2 de Mirascope).*
+
+2. **Script de Ejemplo ([practica1.py](file:///c:/Users/USER/OneDrive/Desktop/practica-mirascope/practica1.py))**:
+   Se actualizó el script para usar la sintaxis v2 de Mirascope y el modelo `google/gemini-flash-latest`.
+
+   ```python
+   from dotenv import load_dotenv
+   from mirascope import llm
+
+   load_dotenv()
+
+   @llm.call(model="google/gemini-flash-latest", temperature=0.7)
+   def saludar(texto: str) -> str:
+       return f"Responde a: {texto}"
+
+   if __name__ == "__main__":
+       respuesta = saludar("Hola, ¿cómo estás?")
+       print(respuesta.content)
+   ```
+
+## Verificación
+
+Se ejecutó el script y se recibió una respuesta exitosa de Gemini:
+> Hola. Estoy bien, gracias. ¿Y tú?
+
+## Cómo Ejecutar
+
+Para probarlo tú mismo, ejecuta:
+```bash
+python practica1.py
+```
